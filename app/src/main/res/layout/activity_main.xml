@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp">
+
+    <!-- DISTANCE -->
+    <TextView
+        android:id="@+id/labelDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DISTANCE"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00 km"
+        android:textColor="#FFFFFF"
+        android:textSize="58sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_marginBottom="28dp" />
+
+    <!-- CURRENT PACE — highest-priority metric: biggest, heaviest, distinct
+         font family, accent color, so it reads first at a glance -->
+    <TextView
+        android:id="@+id/labelPace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CURRENT PACE"
+        android:textColor="#1DB954"
+        android:textSize="14sp"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvPace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--:-- /km"
+        android:textColor="#1DB954"
+        android:textSize="72sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginBottom="28dp" />
+
+    <!-- ELAPSED TIME -->
+    <TextView
+        android:id="@+id/labelTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TIME"
+        android:textColor="#888888"
+        android:textSize="14sp"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textColor="#DDDDDD"
+        android:textSize="52sp"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginBottom="40dp" />
+
+    <!-- GPS STATUS -->
+    <TextView
+        android:id="@+id/tvGpsStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acquiring GPS..."
+        android:textColor="#FFAA00"
+        android:textSize="13sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Shown only while a run is active; buttons are disabled and the
+         only way to pause is a long-press on the physical Volume Down key -->
+    <TextView
+        android:id="@+id/tvLockHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔒 LOCKED — HOLD VOLUME DOWN TO PAUSE"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:letterSpacing="0.05"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:layout_marginBottom="24dp" />
+
+    <!-- START / STOP BUTTON -->
+    <Button
+        android:id="@+id/btnStartStop"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="START"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@drawable/btn_start"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp" />
+
+    <!-- RESET + SYNC — small secondary actions, side by side to save
+         vertical space on a small screen -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="120dp"
+            android:layout_height="44dp"
+            android:text="RESET"
+            android:textSize="15sp"
+            android:background="@drawable/btn_reset"
+            android:textColor="#CCCCCC"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Pushes any not-yet-uploaded .gpx files to the NAS over SFTP.
+             Manual only — see NasSync.java / README for setup. -->
+        <Button
+            android:id="@+id/btnSync"
+            android:layout_width="120dp"
+            android:layout_height="44dp"
+            android:text="SYNC"
+            android:textSize="15sp"
+            android:background="@drawable/btn_reset"
+            android:textColor="#CCCCCC" />
+
+    </LinearLayout>
+
+</LinearLayout>

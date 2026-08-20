@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Bumped from 4.2.2 (2021): its bundled expectations around
+        // build-tools break on both very old build-tools (D8 crashes
+        // dexing the JSch dependency) and very new ones (AGP 4.2.2 still
+        // requires the legacy `dx` binary, removed from build-tools 31+).
+        // 7.4.2 supports modern build-tools cleanly, still runs on JDK 11,
+        // and doesn't require raising compileSdk/minSdk/targetSdk.
+        classpath 'com.android.tools.build:gradle:7.4.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}

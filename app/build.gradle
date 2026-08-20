@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    // AGP 7.x wants this instead of the manifest's package attribute
+    namespace "com.runtracker"
+    compileSdkVersion 28
+    // Pinned newer than compileSdkVersion on purpose: build-tools 30.0.2's
+    // D8 dexer crashes (NullPointerException) converting the JSch library's
+    // bytecode. 33.0.1 has a fixed D8 and still targets compileSdk 28 fine.
+    buildToolsVersion "33.0.1"
+    defaultConfig {
+        // Renamed from com.runtracker so this coexists with the older
+        // signed install already on the phone instead of colliding with
+        // it (INSTALL_FAILED_UPDATE_INCOMPATIBLE) — deliberately kept
+        // separate from `namespace` above, so none of the Java source
+        // package/folder layout needed to move for this rename.
+        applicationId "com.sweat"
+        minSdkVersion 26          // Android 8.0 — matches the G1
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    // Keep APK small — no splits needed for a single-device target
+    splits {
+        abi { enable false }
+        density { enable false }
+    }
+}
+
+dependencies {
+    // Single deliberate exception to the no-dependencies rule: there is no
+    // SSH/SFTP client in the Android SDK, and hand-rolling SSH2 is not
+    // something to do from scratch. This is the mwiede fork of JSch (not
+    // the original com.jcraft:jsch), which restores compatibility with
+    // modern OpenSSH servers (rsa-sha2 signatures, curve25519 kex) that
+    // most current NAS firmware runs — the classic jsch build gets
+    // rejected by those out of the box. Pure Java, no further transitive
+    // dependencies.
+    //
+    // Pinned to 0.2.12 specifically, NOT latest: versions after 0.2.12
+    // trigger a Gradle 7.x D8 dexing bug (NullPointerException on
+    // Channel$1.class) — a confirmed Gradle bug, not a jsch bug, see
+    // https://github.com/mwiede/jsch/issues/512 and
+    // https://github.com/gradle/gradle/issues/27856. 0.2.12 already has
+    // the modern-OpenSSH compatibility (rsa-sha2, curve25519) this fork
+    // was chosen for. Revisit this pin if the project ever moves to
+    // Gradle 8.x, which doesn't hit the bug.
+    implementation 'com.github.mwiede:jsch:0.2.12'
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.runtracker">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- "Allow all the time". Doesn't exist below API 29 (the G1 is 8.1),
+         where a single ACCESS_FINE_LOCATION grant already covers background
+         use and the foreground service is what keeps GPS alive. Declared so
+         the app also behaves correctly if it's ever run on Android 10+,
+         where MainActivity requests it as a separate second step. -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!-- Held as a partial wake lock for the duration of an active run
+         (LocationService), so the CPU can't suspend between GPS fixes once
+         the screen goes off and silently stop the run accumulating -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Required (API 28+) to run LocationService as a foreground service,
+         which keeps GPS updates flowing while the app is backgrounded -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Only used by the manual NAS SYNC button (NasSync.java) — the app
+         otherwise never opens a network connection -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.location.gps" android:required="true" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
+        android:label="Sweat"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:keepScreenOn="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Not declaring android:foregroundServiceType — that attribute was
+             added in the API 29 platform and this project compiles against
+             API 28; it isn't required for a foreground service to run on
+             Android 8.1 anyway. -->
+        <service
+            android:name=".LocationService"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
