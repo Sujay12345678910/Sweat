@@ -1,0 +1,13 @@
+# Normalize to LF in the repo; check out platform-native where it matters.
+* text=auto eol=lf
+
+# Gradle wrapper: the shell script must stay LF even on Windows checkouts,
+# and the batch file must stay CRLF or cmd.exe mis-parses it.
+gradlew    text eol=lf
+*.bat      text eol=crlf
+
+# Never touch binaries.
+*.jar binary
+*.apk binary
+*.png binary
+*.gpx binary
