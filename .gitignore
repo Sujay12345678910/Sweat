@@ -4,3 +4,8 @@ app/build/
 build/
 *.iml
 .idea/
+
+# NAS credentials — these belong only on the device, never in the repo
+id_rsa*
+*.pem
+nas_config.properties
