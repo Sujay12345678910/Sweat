@@ -89,7 +89,7 @@ This produces `runtracker_nas_key` (private key) and `runtracker_nas_key.pub`
 3. Create/pick a destination folder for the GPX files, e.g. `/volume1/RunTracker`.
 
 **On the G1 (via microSD/file manager, same as installing the APK):**
-Create `Android/data/com.runtracker/files/nas/` and drop in:
+Create `Android/data/com.sweat/files/nas/` and drop in:
 - `id_rsa` — your `runtracker_nas_key` private key file, renamed to `id_rsa`
 - `nas_config.properties`, containing:
   ```properties
@@ -108,7 +108,7 @@ taps don't re-send them.
 When you tap RESET after a run with at least a couple of recorded points,
 the app writes a `.gpx` file (one per run, timestamped) and shows a "Saved
 run_....gpx" toast. Files live in the app's own storage folder:
-`Android/data/com.runtracker/files/gpx/` — browse there with a file
+`Android/data/com.sweat/files/gpx/` — browse there with a file
 manager or over USB, then upload the file at strava.com/upload (Strava
 accepts GPX uploads directly on their website, no app integration needed).
 This is deliberate: the G1 is meant to be usable with no connectivity
