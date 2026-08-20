@@ -1,4 +1,7 @@
-# Sweat — Build & Install Guide
+# Sweat
+
+I tried making a GPS only tracker that would tell you the running pace
+and distance ran, for offline devices that run Android.
 
 A barebones GPS pace tracker for Android 8.1 (Innioasis G1), shown on the
 device as "Sweat" (`com.sweat`). The project folder/repo and Java package
